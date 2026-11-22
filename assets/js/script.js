@@ -494,3 +494,339 @@
 //     }
 
 // });
+
+// Task 10 — Complete Registration System
+// const firstName = document.getElementById("firstName");
+// const lastName = document.getElementById("lastName");
+// const email = document.getElementById("email");
+// const phoneNumber = document.getElementById("phoneNumber");
+// const dateOfBirth = document.getElementById("birthDate");
+// const gender = document.getElementById("gender");
+// const password = document.getElementById("password");
+// const confirmPassword = document.getElementById("confirmPassword");
+// const terms = document.getElementById("terms");
+// const result = document.getElementById("result");
+// const form = document.getElementById("registerForm");
+
+// const users = [
+//     {
+//         firstName: "John",
+//         lastName: "Doe",
+//         email: "john.doe@example.com"
+//     },
+//     {
+//         firstName: "Jane",
+//         lastName: "Smith",
+//         email: "jane.smith@example.com"
+//     }
+// ];
+
+// function showError(input, message) {
+//     const errorElement = input.nextElementSibling;
+//     errorElement.textContent = message;
+//     errorElement.style.color = "red";
+// }
+
+// function clearError(input) {
+//     const errorElement = input.nextElementSibling;
+//     errorElement.textContent = "";
+// }
+
+// function calculateAge(birthDate) {
+//     const today = new Date();
+//     const birth = new Date(birthDate);
+//     let age = today.getFullYear() - birth.getFullYear();
+//     const month = today.getMonth() - birth.getMonth();
+
+//     if (
+//         month < 0 || (month === 0 && today.getDate() < birth.getDate())
+//     ) {
+//         age--;
+//     }
+//     return age;
+// }
+
+// function validateInput() {
+//     const value = input.value.trim();
+
+//     clearError(input);
+
+//     if (input !== terms && value === "") {
+//         showError(input, `${input.placeholder} is required.`);
+//         return false;
+//     }
+
+//     if (input === firstName && input.value.length < 2) {
+//         showError(firstName, "First name must be at least 2 characters long.");
+//         return false;
+//     }
+
+//     if (input === lastName && input.value.length < 2) {
+//         showError(lastName, "Last name must be at least 2 characters long.");
+//         return false;
+//     }
+
+//     if (input === email) {
+//         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//         if (!emailRegex.test(value)) {
+//             showError(email, "Please enter a valid email address.");
+//             return false;
+//         }
+//         const emailExists = users.some(user => user.email === value);
+//         if (emailExists) {
+//             showError(email, "This email is already registered.");
+//             return false;
+//         }
+//     }
+
+//     if (input === phoneNumber) {
+//         const phoneRegex = /^\+994(50|51|55|60|70|77|99)\d{7}$/;
+//         if (!phoneRegex.test(value)) {
+//             showError(phoneNumber, "Example: +994501234567");
+//             return false;
+//         }
+//     }
+
+//     if (input === dateOfBirth) {
+//         const selectedDate = new Date(value);
+//         const today = new Date();
+//         if (Number.isNaN(selectedDate.getTime()) || selectedDate > today) {
+//             showError(dateOfBirth, "Please enter a valid date of birth.");
+//             return false;
+//         }
+//         const age = calculateAge(value);
+//         if (age < 18) {
+//             showError(dateOfBirth, "You must be at least 18 years old.");
+//             return false;
+//         }
+//     }
+
+//     if (input === gender && value === "") {
+//         showError(gender, "Please select your gender.");
+//         return false;
+//     }
+
+//     if (input === password) {
+//         const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
+//         if (!passwordRegex.test(value)) {
+//             showError(password, "Password must be at least 8 characters long and include at least one uppercase letter, one number, and one special character.");
+//             return false;
+//         }
+//     }
+
+//     if (input === confirmPassword && value !== password.value) {
+//         showError(confirmPassword, "Passwords do not match.");
+//         return false;
+//     }
+//     return true;
+
+// }
+
+// function validateTerms() {
+//     const error = document.getElementById("termsError");
+//     if (!terms.checked) {
+//         showError(terms, "You must agree to the terms and conditions.");
+//         return false;
+//     }
+
+//     error.textContent = "";
+//     return true;
+// }
+
+// const inputs = [firstName, lastName, email, phoneNumber, dateOfBirth, gender, password, confirmPassword];
+
+// inputs.forEach(input => {
+//     input.addEventListener("input", () => {
+//         validateInput(input);
+
+//         if (input === password && password.value !== "") {
+//             validateInput(confirmPassword);
+//         }
+//     });
+// });
+
+// gender.addEventListener("change", () => {
+//     validateInput(gender);
+// });
+
+// birthDate.addEventListener("change", () => {
+//     validateInput(dateOfBirth);
+// });
+
+// terms.addEventListener("change", () => {
+//     validateTerms();
+// });
+
+// inputs.forEach(input => {
+
+//     input.addEventListener("focus", () => {
+//         input.style.backgroundColor = "#f0f8ff";
+//     });
+
+// });
+
+// form.addEventListener("submit", (event) => {
+//     event.preventDefault();
+
+//     let isValid = true;
+
+//     inputs.forEach(input => {
+//         const valid = validateInput(input);
+
+//         if (!valid) {
+//             isValid = false;
+//         }
+//     });
+
+//     if (!validateTerms()) {
+//         isValid = false;
+//     }
+
+//     if (!isValid) {
+//         result.textContent = "Please fix the errors in the form.";
+//         return;
+//     }
+
+//     const user = {
+//         firstName: firstName.value.trim(),
+//         lastName: lastName.value.trim(),
+//         email: email.value.trim().toLowerCase(),
+//         phone: phone.value.trim(),
+//         birthDate: birthDate.value,
+//         age: calculateAge(birthDate.value),
+//         gender: gender.value,
+//         password: password.value
+//     };
+
+//     users.push(user);
+
+//     result.innerHTML = `
+//         <h3>Registration Successful!</h3>
+//         <p>First Name: ${user.firstName}</p>
+//         <p>Last Name: ${user.lastName}</p>
+//         <p>Email: ${user.email}</p>
+//         <p>Phone Number: ${user.phone}</p>
+//         <p>Date of Birth: ${user.birthDate}</p>
+//         <p>Age: ${user.age}</p>
+//         <p>Gender: ${user.gender}</p>
+//     `;
+
+//     form.reset();
+
+//     inputs.forEach(input => {
+//         input.style.backgroundColor = "";
+//     });
+// });
+
+// Task 11 — Live Username Availability
+// const username = document.getElementById("username");
+// const message = document.getElementById("message");
+
+// const existingUsernames = [
+//     "admin",
+//     "ibrahim",
+//     "john123",
+//     "test_user",
+//     "developer"
+// ];
+
+// function validateUsername() {
+//     const value = username.value.trim();
+
+//     if(value === ""){
+//         message.textContent = "";
+//         return;
+//     }
+
+//     if(value.length < 5 || value.length > 15){
+//         message.textContent = "Username must be 5-15 characters!";
+//         return;
+//     }
+
+//     const usernameRegex = /^[a-zA-Z0-9_]+$/;
+
+//     if(!usernameRegex.test(value)){
+//         message.textContent = "Only letters, numbers and _ allowed!";
+//     }
+
+//     const isTaken = existingUsernames.some(item => item.toLowerCase() === value.toLowerCase());
+
+//     if (isTaken){
+//         message.textContent = "Username already taken!";
+//         return;
+//     }
+
+//     message.textContent = "Username available!";
+// }
+
+// username.addEventListener("input", validateUsername);
+
+// username.addEventListener("focus", function(){
+//     username.style.backgroundColor = "#f0f8ff";
+// });
+
+// username.addEventListener("blur", function() {
+//     username.style.backgroundColor = "";
+// });
+
+// Task 12 — Password & Confirm Password
+
+// const password = document.getElementById("password");
+// const confirmPassword = document.getElementById("confirmPassword");
+// const message = document.getElementById("message");
+// const showPassword = document.getElementById("showPassword");
+
+// function validatePassword() {
+//     const pass = password.value;
+//     const confirm = confirmPassword.value;
+
+//     if (pass === "") {
+//         message.textContent = "";
+//         return;
+//     }
+
+//     if (pass.length < 8) {
+//         message.textContent = "Password must contain at least 8 characters!";
+//         return;
+//     }
+
+//     if (confirm === "") {
+//         message.textContent = "";
+//         return;
+//     }
+
+//     if (pass === confirm) {
+//         message.textContent = "Passwords match!";
+//     } else {
+//         message.textContent = "Passwords don't match!";
+//     }
+// }
+
+// password.addEventListener("input", validatePassword);
+// confirmPassword.addEventListener("input", validatePassword);
+
+// showPassword.addEventListener("change", function () {
+//     if (showPassword.checked) {
+//         password.type = "text";
+//         confirmPassword.type = "text";
+//     } else {
+//         password.type = "password";
+//         confirmPassword.type = "password";
+//     }
+// });
+
+// password.addEventListener("focus", function(){
+//     password.style.backgroundColor = "#f0f8ff";
+// });
+
+// confirmPassword.addEventListener("focus", function(){
+//     confirmPassword.style.backgroundColor = "#f0f8ff";
+// });
+
+// password.addEventListener("blur", function(){
+//     password.style.backgroundColor = "";
+// });
+
+// confirmPassword.addEventListener("blur", function(){
+//     confirmPassword.style.backgroundColor = "";
+// });
